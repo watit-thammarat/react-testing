@@ -1,12 +1,20 @@
-import { SAVE_COMMENT, GET_COMMENTS } from './types';
+import axios from 'axios';
+
+import { SAVE_COMMENT, FETCH_COMMENTS } from './types';
 
 export const saveComment = comment => {
   return {
     type: SAVE_COMMENT,
-    payload: comment
+    payload: { id: new Date().getTime(), body: comment }
   };
 };
 
-export const getComments = () => {
-  return { type: GET_COMMENTS };
+export const fetchComments = () => async dispatch => {
+  try {
+    const url = 'https://jsonplaceholder.typicode.com/comments';
+    const { data } = await axios.get(url);
+    dispatch({ type: FETCH_COMMENTS, payload: data });
+  } catch (err) {
+    console.error(err);
+  }
 };

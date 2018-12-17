@@ -12,6 +12,6 @@ describe('saveComment', () => {
     const comment = 'New Comment';
     const { payload } = saveComment(comment);
 
-    expect(payload).toEqual(comment);
+    expect(payload.body).toEqual(comment);
   });
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { saveComment } from '../actions';
+import { saveComment, fetchComments } from '../actions';
 
 class CommentBox extends Component {
   state = {
@@ -16,20 +16,32 @@ class CommentBox extends Component {
     this.setState({ comment: '' });
   };
 
+  onClick = e => {
+    this.props.fetchComments();
+  };
+
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <h4>Add a comment</h4>
-        <textarea value={this.state.comment} onChange={this.onCommentChange} />
-        <div>
-          <button>Submit Comment</button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <h4>Add a comment</h4>
+          <textarea
+            value={this.state.comment}
+            onChange={this.onCommentChange}
+          />
+          <div>
+            <button>Submit Comment</button>
+          </div>
+        </form>
+        <button className="fetch-comments" onClick={this.onClick}>
+          Fetch Comments
+        </button>
+      </div>
     );
   }
 }
 
 export default connect(
   null,
-  { saveComment }
+  { saveComment, fetchComments }
 )(CommentBox);

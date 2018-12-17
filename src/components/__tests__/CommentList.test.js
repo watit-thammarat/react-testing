@@ -7,7 +7,10 @@ import Root from '../../Root';
 
 describe('CommentList component', () => {
   let wrapped;
-  const comments = ['Comment 1', 'Comment 2'];
+  const comments = [
+    { id: new Date().getTime(), body: 'Comment 1' },
+    { id: new Date().getTime() + 10, body: 'Comment 2' }
+  ];
 
   beforeEach(() => {
     const initialState = { comments };
@@ -29,7 +32,7 @@ describe('CommentList component', () => {
 
   it('shows the text for each comment', () => {
     _.forEach(comments, c => {
-      expect(wrapped.render().text()).toContain(c);
+      expect(wrapped.render().text()).toContain(c.body);
     });
   });
 });
