@@ -15,8 +15,6 @@ describe('CommentBox component', () => {
     );
   });
 
-  beforeEach(() => {});
-
   afterEach(() => {
     wrapped.unmount();
     wrapped = null;
