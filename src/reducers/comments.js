@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { SAVE_COMMENT, FETCH_COMMENTS } from '../actions/types';
 
 export default (state = [], { type, payload }) => {
@@ -5,7 +7,10 @@ export default (state = [], { type, payload }) => {
     case SAVE_COMMENT:
       return [...state, payload];
     case FETCH_COMMENTS:
-      return [...state, ...payload];
+      return [
+        ...state,
+        ..._.map(payload, ({ id, name, body }) => ({ id, body: name }))
+      ];
     default:
       return state;
   }

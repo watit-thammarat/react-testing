@@ -4,9 +4,11 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import reducers from './reducers';
+import async from './middlewares/async';
+import stateValidator from './middlewares/stateValidator';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const middleware = [thunk];
+const middleware = [async, stateValidator];
 
 export default ({ children, initialState = {} }) => {
   const store = createStore(

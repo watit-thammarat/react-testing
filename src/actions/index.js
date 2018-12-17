@@ -9,14 +9,20 @@ export const saveComment = comment => {
   };
 };
 
-export const fetchComments = () => async dispatch => {
-  try {
-    const url = 'https://jsonplaceholder.typicode.com/comments';
-    const { data } = await axios.get(url);
-    dispatch({ type: FETCH_COMMENTS, payload: data });
-  } catch (err) {
-    console.error(err);
-  }
+// export const fetchComments = () => async dispatch => {
+//   try {
+//     const url = 'https://jsonplaceholder.typicode.com/comments';
+//     const { data } = await axios.get(url);
+//     dispatch({ type: FETCH_COMMENTS, payload: data });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+export const fetchComments = () => {
+  const url = 'https://jsonplaceholder.typicode.com/comments';
+  const promise = axios.get(url);
+  return { type: FETCH_COMMENTS, payload: promise };
 };
 
 export const changeAuth = isLoggedIn => ({
